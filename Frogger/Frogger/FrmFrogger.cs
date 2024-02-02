@@ -62,14 +62,26 @@ namespace Frogger
 
             e.Graphics.FillRectangles(brBahnHell, alleBahnen);
 
-            // TODO: Bahnen sollen sich in der Farbe abwechseln (brBahnHell, brBahnDunkel)
+            // FERTIG: Bahnen sollen sich in der Farbe abwechseln (brBahnHell, brBahnDunkel)
 
             e.Graphics.FillRectangle(brZiel, alleBahnen[0]);
             e.Graphics.FillRectangle(brStart, alleBahnen[alleBahnen.Length-1]);
             
             e.Graphics.DrawRectangles(pnRand, alleBahnen);
 
-            foreach(Hindernis aktuellesHindernis in alleHindernisse)
+            for (int i = 1; i < alleBahnen.Length - 1; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    e.Graphics.FillRectangle(brBahnHell, alleBahnen[i]);
+                }
+                else
+                {
+                    e.Graphics.FillRectangle(brBahnDunkel, alleBahnen[i]);
+                }
+            }
+
+            foreach (Hindernis aktuellesHindernis in alleHindernisse)
             {
                 e.Graphics.FillRectangle(
                     aktuellesHindernis.Brush,
@@ -78,6 +90,8 @@ namespace Frogger
                     aktuellesHindernis.Width,
                     aktuellesHindernis.Height);
             }
+
+         
 
             e.Graphics.FillEllipse(brSpieler, spieler);
 
@@ -103,7 +117,9 @@ namespace Frogger
             }
 
             for(int i = alleHindernisse.Count -1; i >= 0; i--)
-            { 
+            {
+                
+
                 if ((alleHindernisse[i].X + alleHindernisse[i].Width) < 0)
                 {
                     alleHindernisse.RemoveAt(i);
@@ -112,6 +128,22 @@ namespace Frogger
             }
 
             // TODO Kontrollieren, ob Spieler überfahren wurde.
+
+            for (int i = 0; i < alleHindernisse.Count; i++)
+            {
+                Rectangle rect = new Rectangle(alleHindernisse[i].X, alleHindernisse[i].Y, alleHindernisse[i].Width, alleHindernisse[i].Height);
+
+                if (rect.Contains(spieler))
+                {
+                    //MessageBox.Show("nigga");
+                    spieler = new Rectangle((breite / 2) - 15, hoehe - 35, 30, 30);
+
+
+                }
+
+
+            }
+
 
             this.Refresh();
         }
