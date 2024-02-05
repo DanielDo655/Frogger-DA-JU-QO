@@ -198,11 +198,25 @@ namespace Frogger
             {
                 spieler.X = spieler.X + breiteJeBereich;
             }
-            
+            if (spieler.X + spieler.Width >=  breite)
+            {
+
+            spieler = new Rectangle(breite -30, spieler.Y, 30, 30);
+
+
+            }
+            if (spieler.X  <=0)
+            {
+
+                spieler = new Rectangle(breite, spieler.Y, 30, 30);
+
+
+            }
+
             if (spieler.Y > hoehe)
             {
                 
-                spieler = new Rectangle((breite / 2) - 15, hoehe - 35, 30, 30);
+                spieler = new Rectangle((spieler.X), hoehe - 35, 30, 30);
 
 
             }
