@@ -180,6 +180,26 @@ namespace Frogger
                 spieler.X = spieler.X + breiteJeBereich;
             }
 
+            if (e.KeyCode == Keys.W)
+            {
+                spieler.Y = spieler.Y - hoeheJeBereich;
+            }
+
+            if (e.KeyCode == Keys.S)
+            {
+                spieler.Y = spieler.Y + hoeheJeBereich;
+            }
+
+            if (e.KeyCode == Keys.A)
+            {
+                spieler.X = spieler.X - breiteJeBereich;
+            }
+
+            if (e.KeyCode == Keys.D)
+            {
+                spieler.X = spieler.X + breiteJeBereich;
+            }
+
 
             this.Refresh();
         }
