@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Media;
 using System.Windows.Forms;
 
 namespace Frogger
 {
     public partial class FrmFrogger : Form
     {
+        private SoundPlayer deathsound = new SoundPlayer("death_effect.wav");
+        private SoundPlayer soundPlayer = new SoundPlayer("move_sound.wav");
         static int anzahlBereiche = 6;
         // -1 ist ein Platzhalter
         int breite = -1;
@@ -143,7 +146,7 @@ namespace Frogger
                 {
                     //MessageBox.Show("nigga");
                     spieler = new Rectangle((breite / 2) - 15, hoehe - 35, 30, 30);
-
+                    deathsound.Play();
 
                 }
 
@@ -182,21 +185,25 @@ namespace Frogger
             if (e.KeyCode == Keys.W)
             {
                 spieler.Y = spieler.Y - hoeheJeBereich;
+                soundPlayer.Play();
             }
 
             if (e.KeyCode == Keys.S)
             {
                 spieler.Y = spieler.Y + hoeheJeBereich;
+                soundPlayer.Play();
             }
 
             if (e.KeyCode == Keys.A)
             {
                 spieler.X = spieler.X - breiteJeBereich;
+                soundPlayer.Play();
             }
 
             if (e.KeyCode == Keys.D)
             {
                 spieler.X = spieler.X + breiteJeBereich;
+                soundPlayer.Play();
             }
             
             if (spieler.Y > hoehe)
