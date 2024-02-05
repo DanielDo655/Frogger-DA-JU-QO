@@ -7,13 +7,15 @@ namespace Frogger
 {
     public partial class FrmFrogger : Form
     {
-        static int anzahlBereiche = 6;
+        static int anzahlBereicheY = 6;
+        static int anzahlBereicheX = 12;
+
         // -1 ist ein Platzhalter
         int breite = -1;
         int hoehe = -1;
         int hoeheJeBereich = -1;
         int breiteJeBereich = -1;
-        Rectangle[] alleBahnen = new Rectangle[anzahlBereiche];
+        Rectangle[] alleBahnen = new Rectangle[anzahlBereicheY];
         List<Hindernis> alleHindernisse = new List<Hindernis>();
         Rectangle spieler;
         int spawnRate = 14;
@@ -38,9 +40,9 @@ namespace Frogger
                 breite = this.ClientSize.Width;
                 hoehe = this.ClientSize.Height;
 
-                hoeheJeBereich = hoehe / anzahlBereiche;
+                hoeheJeBereich = hoehe / anzahlBereicheY;
 
-                breiteJeBereich = breite / anzahlBereiche;
+                breiteJeBereich = breite / anzahlBereicheX;
 
                 //Puffer für Rundungsfehler
                 hoeheJeBereich = hoeheJeBereich + 2;
@@ -111,7 +113,7 @@ namespace Frogger
             {
                 spawnZaehler = 0;
 
-                int zufall = rndBahn.Next(1, anzahlBereiche-1);
+                int zufall = rndBahn.Next(1, anzahlBereicheY-1);
                 int yWertDerBahn = alleBahnen[zufall].Top;
 
                 alleHindernisse.Add(new Hindernis(breite, yWertDerBahn, 60, hoeheJeBereich, 10, Color.Red));
