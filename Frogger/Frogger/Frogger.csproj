@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DriveBy.cs" />
     <Compile Include="Hindernis.cs" />
     <Compile Include="FrmFrogger.cs">
       <SubType>Form</SubType>
