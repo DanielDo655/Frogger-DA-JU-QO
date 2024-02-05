@@ -12,6 +12,7 @@ namespace Frogger
         int breite = -1;
         int hoehe = -1;
         int hoeheJeBereich = -1;
+        int breiteJeBereich = -1;
         Rectangle[] alleBahnen = new Rectangle[anzahlBereiche];
         List<Hindernis> alleHindernisse = new List<Hindernis>();
         Rectangle spieler;
@@ -39,8 +40,13 @@ namespace Frogger
 
                 hoeheJeBereich = hoehe / anzahlBereiche;
 
+                breiteJeBereich = breite / anzahlBereiche;
+
                 //Puffer für Rundungsfehler
                 hoeheJeBereich = hoeheJeBereich + 2;
+
+                //Puffer für Rundungsfehler
+                breiteJeBereich = breiteJeBereich + 2;
 
                 spieler = new Rectangle((breite / 2) - 15, hoehe - 35, 30, 30);
 
@@ -163,6 +169,17 @@ namespace Frogger
             {
                 spieler.Y = spieler.Y + hoeheJeBereich;
             }
+
+            if (e.KeyCode == Keys.Left)
+            {
+                spieler.X = spieler.X - breiteJeBereich;
+            }
+
+            if (e.KeyCode == Keys.Right)
+            {
+                spieler.X = spieler.X + breiteJeBereich;
+            }
+
 
             this.Refresh();
         }
