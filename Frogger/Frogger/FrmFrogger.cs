@@ -28,6 +28,7 @@ namespace Frogger
         int spawnRate = 14;
         int spawnZaehler = 0;
         Random rndBahn = new Random();
+        int winCounter = 0;
 
 
         public FrmFrogger()
@@ -106,6 +107,12 @@ namespace Frogger
                     aktuellesHindernis.Height);
             }
 
+            if (alleBahnen[0].Contains(spieler))
+            {
+                winCounter++;
+                spieler = new Rectangle((breite / 2) - 15, hoehe - 35, 30, 30);
+                //MessageBox.Show($"Counter: {0}", Convert.ToString(winCounter));
+            }
          
 
             e.Graphics.FillEllipse(brSpieler, spieler);
@@ -118,6 +125,7 @@ namespace Frogger
             spawnZaehler++;
             if(spawnZaehler == spawnRate)
             {
+                spawnZaehler = spawnRate + 1 + winCounter;
                 spawnZaehler = 0;
 
                 int zufall = rndBahn.Next(1, anzahlBereicheY-1);
