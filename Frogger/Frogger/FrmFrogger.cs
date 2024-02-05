@@ -164,6 +164,7 @@ namespace Frogger
                 spieler.Y = spieler.Y + hoeheJeBereich;
             }
 
+           
             this.Refresh();
         }
     }
