@@ -132,8 +132,8 @@ namespace Frogger
             for (int i = 0; i < alleHindernisse.Count; i++)
             {
                 Rectangle rect = new Rectangle(alleHindernisse[i].X, alleHindernisse[i].Y, alleHindernisse[i].Width, alleHindernisse[i].Height);
-
-                if (rect.Contains(spieler))
+                
+                if (rect.Contains(spieler.X, spieler.Y) || rect.Contains(spieler.X + spieler.Width,spieler.Y +  spieler.Height))
                 {
                     //MessageBox.Show("nigga");
                     spieler = new Rectangle((breite / 2) - 15, hoehe - 35, 30, 30);
