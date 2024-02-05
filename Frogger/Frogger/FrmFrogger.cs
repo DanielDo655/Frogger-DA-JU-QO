@@ -7,13 +7,15 @@ namespace Frogger
 {
     public partial class FrmFrogger : Form
     {
-        static int anzahlBereiche = 6;
+        static int anzahlBereicheY = 6;
+        static int anzahlBereicheX = 12;
+
         // -1 ist ein Platzhalter
         int breite = -1;
         int hoehe = -1;
         int hoeheJeBereich = -1;
         int breiteJeBereich = -1;
-        Rectangle[] alleBahnen = new Rectangle[anzahlBereiche];
+        Rectangle[] alleBahnen = new Rectangle[anzahlBereicheY];
         List<Hindernis> alleHindernisse = new List<Hindernis>();
         Rectangle spieler;
         int spawnRate = 14;
@@ -39,9 +41,9 @@ namespace Frogger
                 breite = this.ClientSize.Width;
                 hoehe = this.ClientSize.Height;
 
-                hoeheJeBereich = hoehe / anzahlBereiche;
+                hoeheJeBereich = hoehe / anzahlBereicheY;
 
-                breiteJeBereich = breite / anzahlBereiche;
+                breiteJeBereich = breite / anzahlBereicheX;
 
                 //Puffer für Rundungsfehler
                 hoeheJeBereich = hoeheJeBereich + 2;
@@ -119,7 +121,7 @@ namespace Frogger
                 spawnZaehler = spawnRate + 1 + winCounter;
                 spawnZaehler = 0;
 
-                int zufall = rndBahn.Next(1, anzahlBereiche-1);
+                int zufall = rndBahn.Next(1, anzahlBereicheY-1);
                 int yWertDerBahn = alleBahnen[zufall].Top;
 
                 alleHindernisse.Add(new Hindernis(breite, yWertDerBahn, 60, hoeheJeBereich, 10, Color.Red));
@@ -206,11 +208,25 @@ namespace Frogger
             {
                 spieler.X = spieler.X + breiteJeBereich;
             }
-            
+            if (spieler.X + spieler.Width >=  breite)
+            {
+
+            spieler = new Rectangle(breite -30, spieler.Y, 30, 30);
+
+
+            }
+            if (spieler.X  <=0)
+            {
+
+                spieler = new Rectangle(breite, spieler.Y, 30, 30);
+
+
+            }
+
             if (spieler.Y > hoehe)
             {
                 
-                spieler = new Rectangle((breite / 2) - 15, hoehe - 35, 30, 30);
+                spieler = new Rectangle((spieler.X), hoehe - 35, 30, 30);
 
 
             }
