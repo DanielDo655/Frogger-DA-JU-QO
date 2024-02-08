@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Media;
 using System.Windows.Forms;
 
 namespace Frogger
 {
     public partial class FrmFrogger : Form
     {
+
+        private SoundPlayer deathsound = new SoundPlayer("death_effect.wav");
+        private SoundPlayer soundPlayer = new SoundPlayer("move_sound.wav");
+        static int anzahlBereiche = 6;
+
         static int anzahlBereicheY = 6;
         static int anzahlBereicheX = 12;
 
@@ -152,8 +158,9 @@ namespace Frogger
                 if (rect.Contains(spieler.X, spieler.Y) || rect.Contains(spieler.X + spieler.Width,spieler.Y +  spieler.Height))
                 {
                     //MessageBox.Show("nigga");
+                    deathsound.Play();
                     spieler = new Rectangle((breite / 2) - 15, hoehe - 35, 30, 30);
-
+                   
 
                 }
 
@@ -192,21 +199,25 @@ namespace Frogger
             if (e.KeyCode == Keys.W)
             {
                 spieler.Y = spieler.Y - hoeheJeBereich;
+                soundPlayer.Play();
             }
 
             if (e.KeyCode == Keys.S)
             {
                 spieler.Y = spieler.Y + hoeheJeBereich;
+                soundPlayer.Play();
             }
 
             if (e.KeyCode == Keys.A)
             {
                 spieler.X = spieler.X - breiteJeBereich;
+                soundPlayer.Play();
             }
 
             if (e.KeyCode == Keys.D)
             {
                 spieler.X = spieler.X + breiteJeBereich;
+                soundPlayer.Play();
             }
             if (spieler.X + spieler.Width >=  breite)
             {
