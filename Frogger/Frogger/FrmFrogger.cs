@@ -118,7 +118,7 @@ namespace Frogger
             spawnZaehler++;
             if(spawnZaehler == spawnRate)
             {
-                spawnZaehler = spawnRate + 1 + winCounter;
+                spawnZaehler = spawnZaehler + 1 + winCounter;
                 spawnZaehler = 0;
 
                 int zufall = rndBahn.Next(1, anzahlBereicheY-1);
