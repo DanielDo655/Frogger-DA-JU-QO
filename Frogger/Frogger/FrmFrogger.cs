@@ -24,7 +24,7 @@ namespace Frogger
         Rectangle[] alleBahnen = new Rectangle[anzahlBereicheY];
         List<Hindernis> alleHindernisse = new List<Hindernis>();
         Rectangle spieler;
-        int spawnRate = 14;
+        int spawnRate = 18;
         int spawnZaehler = 0;
         Random rndBahn = new Random();
         int winCounter = 0;
@@ -122,9 +122,15 @@ namespace Frogger
         private void tmrGameTick_Tick(object sender, EventArgs e)
         {
             spawnZaehler++;
+            if(spawnRate <= 7)
+            {
+                spawnRate = 7;
+            }
+
             if(spawnZaehler == spawnRate)
             {
-                spawnZaehler = spawnRate + 1 + winCounter;
+                spawnZaehler = spawnZaehler + 1 + winCounter;
+                spawnRate = spawnRate - winCounter;
                 spawnZaehler = 0;
 
                 int zufall = rndBahn.Next(1, anzahlBereicheY-1);
@@ -179,21 +185,25 @@ namespace Frogger
             if (e.KeyCode == Keys.Up)
             {
                 spieler.Y = spieler.Y - hoeheJeBereich;
+                soundPlayer.Play();
             }
 
             if(e.KeyCode == Keys.Down)
             {
                 spieler.Y = spieler.Y + hoeheJeBereich;
+                soundPlayer.Play();
             }
 
             if (e.KeyCode == Keys.Left)
             {
                 spieler.X = spieler.X - breiteJeBereich;
+                soundPlayer.Play();
             }
 
             if (e.KeyCode == Keys.Right)
             {
                 spieler.X = spieler.X + breiteJeBereich;
+                soundPlayer.Play();
             }
 
             if (e.KeyCode == Keys.W)
