@@ -29,6 +29,7 @@ namespace Frogger
         int spawnZaehler = 0;
         Random rndBahn = new Random();
         int winCounter = 0;
+        int speed = 5;
 
 
         public FrmFrogger()
@@ -60,14 +61,18 @@ namespace Frogger
 
                 spieler = new Rectangle((breite / 2) - 15, hoehe - 35, 30, 30);
 
-                for (int i = 0; i < alleBahnen.Length; i++)
+                //for (int i = 0; i < alleBahnen.Length; i++)
+                //{
+                //    alleBahnen[i] = new Rectangle(0, i * hoeheJeBereich, breite, hoeheJeBereich);
+                //}
+                for (int i = 0; i < alleBahnenCS.Length; i++)
                 {
                     alleBahnen[i] = new Rectangle(0, i * hoeheJeBereich, breite, hoeheJeBereich);
                 }
 
                 tmrGameTick.Start();
             }
-
+  
 
             SolidBrush brStart = new SolidBrush(Color.LightBlue);
             SolidBrush brZiel = new SolidBrush(Color.LightYellow);
@@ -111,7 +116,8 @@ namespace Frogger
             {
                 winCounter++;
                 spieler = new Rectangle((breite / 2) - 15, hoehe - 35, 30, 30);
-                //MessageBox.Show($"Counter: {0}", Convert.ToString(winCounter));
+                //MessageBox.Show($"Counter: " + Convert.ToString(winCounter));
+                speed = speed + winCounter;
             }
          
 
@@ -137,7 +143,7 @@ namespace Frogger
                 int zufall = rndBahn.Next(1, anzahlBereicheY-1);
                 int yWertDerBahn = alleBahnen[zufall].Top;
 
-                alleHindernisse.Add(new Hindernis(breite, yWertDerBahn, 60, hoeheJeBereich, 10, Color.Red));
+                alleHindernisse.Add(new Hindernis(breite, yWertDerBahn, 60, hoeheJeBereich, speed, Color.Red));
             }
 
             foreach (Hindernis aktuellesHindernis in alleHindernisse)
