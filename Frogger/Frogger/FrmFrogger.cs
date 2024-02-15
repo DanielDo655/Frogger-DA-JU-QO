@@ -30,7 +30,9 @@ namespace Frogger
         Random rndBahn = new Random();
         int winCounter = 0;
         int speed = 5;
-
+        TextBox winsAnzeigen = new TextBox();
+        Point nullPunkt = new Point(1000, 1000);
+        
 
         public FrmFrogger()
         {
@@ -42,9 +44,19 @@ namespace Frogger
             DoubleBuffered = true;
         }
 
+        private void WinsAnzeigen()
+        {
+            winsAnzeigen.Location = nullPunkt;
+            winsAnzeigen.Text = ("Wins: " + Convert.ToString(winCounter));
+            winsAnzeigen.Show();
+        }
+
         private void FrmFrogger_Paint(object sender, PaintEventArgs e)
         {
-            if(tmrGameTick.Enabled == false)
+            WinsAnzeigen();
+            
+
+            if (tmrGameTick.Enabled == false)
             {
                 breite = this.ClientSize.Width;
                 hoehe = this.ClientSize.Height;
