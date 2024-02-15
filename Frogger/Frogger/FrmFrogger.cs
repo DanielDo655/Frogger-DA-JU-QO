@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Media;
+using System.Security.Cryptography;
 using System.Windows.Forms;
 
 namespace Frogger
@@ -28,6 +29,10 @@ namespace Frogger
         int spawnZaehler = 0;
         Random rndBahn = new Random();
         int winCounter = 0;
+
+        // DriveByHinderniss mit Text und Counter, damit man einstellen kann wie oft der spawnt
+        Font driveByFont = new Font("Arial", 12, FontStyle.Bold, GraphicsUnit.Point);
+        int driveByCounter = 0;
 
 
         public FrmFrogger()
@@ -84,6 +89,7 @@ namespace Frogger
             
             e.Graphics.DrawRectangles(pnRand, alleBahnen);
 
+            // Bahnen wechseln Farben
             for (int i = 1; i < alleBahnen.Length - 1; i++)
             {
                 if (i % 2 == 0)
@@ -106,10 +112,13 @@ namespace Frogger
                     aktuellesHindernis.Height);
             }
 
+
             if (alleBahnen[0].Contains(spieler))
             {
                 winCounter++;
                 spieler = new Rectangle((breite / 2) - 15, hoehe - 35, 30, 30);
+
+               
                 //MessageBox.Show($"Counter: {0}", Convert.ToString(winCounter));
             }
          
@@ -121,6 +130,9 @@ namespace Frogger
 
         private void tmrGameTick_Tick(object sender, EventArgs e)
         {
+
+            Graphics g = this.CreateGraphics();
+
             spawnZaehler++;
             if(spawnRate <= 7)
             {
@@ -132,19 +144,34 @@ namespace Frogger
                 spawnZaehler = spawnZaehler + 1 + winCounter;
                 spawnRate = spawnRate - winCounter;
                 spawnZaehler = 0;
+                
 
                 int zufall = rndBahn.Next(1, anzahlBereicheY-1);
                 int yWertDerBahn = alleBahnen[zufall].Top;
 
-                alleHindernisse.Add(new Hindernis(breite, yWertDerBahn, 60, hoeheJeBereich, 10, Color.Red));
+                driveByCounter++;
+                switch (driveByCounter)
+                {
+                    case 1 :
+                    case 2:
+                    case 3:
+                    case 4: alleHindernisse.Add(new Hindernis(breite, yWertDerBahn, 60, hoeheJeBereich, 10, Color.Red));
+                        break;
+                    case 5: alleHindernisse.Add(new DriveBy(3, breite, yWertDerBahn, 60, hoeheJeBereich, 10, Color.Black)); driveByCounter = 0;
+                        break;
+                }
+               
+               
+
             }
 
             foreach (Hindernis aktuellesHindernis in alleHindernisse)
             {
                 aktuellesHindernis.Move();
+                g.DrawString("nigga", driveByFont, Brushes.Blue, aktuellesHindernis.X, aktuellesHindernis.Y);
             }
 
-            for(int i = alleHindernisse.Count -1; i >= 0; i--)
+            for (int i = alleHindernisse.Count -1; i >= 0; i--)
             {
                 
 

@@ -28,6 +28,8 @@ namespace Frogger
         public SolidBrush Brush;
 
 
+
+
         public Hindernis(int X, int Y, int Width, int Height, int Speed, Color Color)
         {
             this.X = X;
@@ -38,6 +40,7 @@ namespace Frogger
             this.Color = Color;
             this.Brush = new SolidBrush(Color);
         }
+
 
         public void Move()
         {

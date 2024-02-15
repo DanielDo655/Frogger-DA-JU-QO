@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Frogger
 {
@@ -12,7 +14,7 @@ namespace Frogger
 
         private int timer;
 
-        public DriveBy(int X, int Y, int Width, int Height, int Speed, Color Color) : base(X, Y, Width, Height, Speed, Color)
+        public DriveBy(int timer,int X, int Y, int Width, int Height, int Speed, Color Color) : base(X, Y, Width, Height, Speed, Color)
         {
             base.X = X;
             base.Y = Y;
@@ -20,7 +22,17 @@ namespace Frogger
             base.Height = Height;
             base.Speed = Speed;
             base.Color = Color;
+            this.timer = timer;
+
+           
 
         }
+
+        public int Timer
+        {
+            get { return timer; }
+            set { timer = value; for (int i = 1; i < timer; i++) { timer--; } }
+
+        } 
     }
 }
