@@ -22,6 +22,7 @@ namespace Frogger
         int hoeheJeBereich = -1;
         int breiteJeBereich = -1;
         Rectangle[] alleBahnen = new Rectangle[anzahlBereicheY];
+        Bahn[] alleBahnenCS = new Bahn[anzahlBereicheY];
         List<Hindernis> alleHindernisse = new List<Hindernis>();
         Rectangle spieler;
         int spawnRate = 18;
