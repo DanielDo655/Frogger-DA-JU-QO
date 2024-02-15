@@ -219,21 +219,23 @@ namespace Frogger
                 spieler.X = spieler.X + breiteJeBereich;
                 soundPlayer.Play();
             }
+            //Rechte Bande
             if (spieler.X + spieler.Width >=  breite)
             {
 
-            spieler = new Rectangle(breite -30, spieler.Y, 30, 30);
+                spieler = new Rectangle(breite -30, spieler.Y, 30, 30);
 
 
             }
+            //Linke Bande
             if (spieler.X  <=0)
             {
 
-                spieler = new Rectangle(breite, spieler.Y, 30, 30);
+                spieler = new Rectangle(breite - this.ClientSize.Width, spieler.Y, 30, 30);
 
 
             }
-
+            // Untere Bande 
             if (spieler.Y > hoehe)
             {
                 
