@@ -148,14 +148,14 @@ namespace Frogger
 
             if(spawnZaehler == spawnRate)
             {
-                spawnZaehler = spawnZaehler + 1 + winCounter;
+                spawnZaehler = spawnZaehler + 1;
                 spawnRate = spawnRate - winCounter;
                 spawnZaehler = 0;
 
                 int zufall = rndBahn.Next(1, anzahlBereicheY-1);
                 int yWertDerBahn = alleBahnen[zufall].Top;
 
-                alleHindernisse.Add(new Hindernis(breite, yWertDerBahn, 60, hoeheJeBereich, speed, Color.Red));
+                alleHindernisse.Add(new Hindernis(breite, yWertDerBahn, 60, hoeheJeBereich, 10, Color.Red));
             }
 
             foreach (Hindernis aktuellesHindernis in alleHindernisse)
