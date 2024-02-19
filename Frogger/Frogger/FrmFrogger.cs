@@ -30,9 +30,9 @@ namespace Frogger
         Random rndBahn = new Random();
         int winCounter = 0;
         int speed = 5;
-        TextBox winsAnzeigen = new TextBox();
-        Point nullPunkt = new Point(1000, 1000);
-        
+        SolidBrush blackBrush = new SolidBrush(Color.Black);
+        Font font1 = new Font("Arial", 24, FontStyle.Bold, GraphicsUnit.Pixel);
+
 
         public FrmFrogger()
         {
@@ -44,16 +44,9 @@ namespace Frogger
             DoubleBuffered = true;
         }
 
-        private void WinsAnzeigen()
-        {
-            winsAnzeigen.Location = nullPunkt;
-            winsAnzeigen.Text = ("Wins: " + Convert.ToString(winCounter));
-            winsAnzeigen.Show();
-        }
-
         private void FrmFrogger_Paint(object sender, PaintEventArgs e)
         {
-            WinsAnzeigen();
+
             
 
             if (tmrGameTick.Enabled == false)
@@ -128,8 +121,13 @@ namespace Frogger
             {
                 winCounter++;
                 spieler = new Rectangle((breite / 2) - 15, hoehe - 35, 30, 30);
-                //MessageBox.Show($"Counter: " + Convert.ToString(winCounter));
-                speed = speed + winCounter;
+                speed = speed + 1;
+
+                if(speed >= 20)
+                {
+                    speed = 20;
+                }
+                alleHindernisse.Clear();
             }
          
 
@@ -155,7 +153,7 @@ namespace Frogger
                 int zufall = rndBahn.Next(1, anzahlBereicheY-1);
                 int yWertDerBahn = alleBahnen[zufall].Top;
 
-                alleHindernisse.Add(new Hindernis(breite, yWertDerBahn, 60, hoeheJeBereich, 10, Color.Red));
+                alleHindernisse.Add(new Hindernis(breite, yWertDerBahn, 60, hoeheJeBereich, speed, Color.Red));
             }
 
             foreach (Hindernis aktuellesHindernis in alleHindernisse)
